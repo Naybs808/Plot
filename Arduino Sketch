@@ -1,0 +1,23 @@
+unsigned long timeStamp = 0;
+unsigned long timerDelay = 150; // 1 second
+int photoTran = A1; 
+int reading = 0;
+
+
+void setup() {
+  pinMode(photoTran, INPUT);
+  Serial.begin(9600); 
+}
+
+void loop() {
+// We just read the value on the analogPin
+if(Serial) {
+ if (millis() - timeStamp > timerDelay ) {
+     reading = analogRead(photoTran); 
+     unsigned long mills = millis();
+     Serial.println(reading);// instead of println which sends additional \r\n 
+     Serial.flush();
+     timeStamp =millis();  // reset timer instead of delay(100); 
+ }
+}
+}
